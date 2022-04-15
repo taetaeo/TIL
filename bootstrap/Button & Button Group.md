@@ -53,3 +53,12 @@
 </div>
 ```
 
+## Vertical variation
+
+```html
+<div class="btn-group-vertical">
+  ...
+</div>
+```
+
+- `btn-group` 에 `vertical` 요소를 넣음으로써, 수직형태의 버튼의 UI를 구성
