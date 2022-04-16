@@ -117,3 +117,37 @@ modalEl.addEventListener('shown.bs.modal',function(){
 })
 ```
 
+## 성능 최적화 후 Modal
+
+```js
+import Modal from 'bootstrap/js/dist/modal' 
+
+
+//  Modal
+new Modal(document.querySelector('#exampleModal'),{
+  backdrop:'static' // 배경을 선택할 때 꺼지지 않도록
+})
+```
+
+```html
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        ...
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>
+```
+
+- Bootstrap에서 개별적으로 꺼내서 Modal을 사용
