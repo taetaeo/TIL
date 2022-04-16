@@ -18,6 +18,12 @@
 
 [poperJS 더 알아보기](https://popper.js.org/) 
 
+- 터미널에서 다음과 같이 입력
+
+```sh
+npm i @popperjs/core 
+```
+
 <br/>
 
 ## NPM 프로젝트 생성
