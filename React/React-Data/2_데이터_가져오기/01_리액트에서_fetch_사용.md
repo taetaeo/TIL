@@ -276,3 +276,9 @@ export default App;
    - `import { getRewviews } from "../api";` 를 불러오고,
    - `reviews` 프로퍼티를 `setItems`에 넣는다.
 4. `<button onClick={handleLoadClick}>불러오기</button>` 불러오기 버튼을 누르면, 네트워크로 연결된 데이터들이 출력되도록 한다.
+
+<br/>
+
+## 01.3. 결과
+
+![1](https://github.com/ohtaekwon/TIL/blob/master/React/React-Data/2_%EB%8D%B0%EC%9D%B4%ED%84%B0_%EA%B0%80%EC%A0%B8%EC%98%A4%EA%B8%B0/img/1.gif?raw=true)
