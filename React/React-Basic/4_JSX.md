@@ -1,0 +1,89 @@
+# 4. JSX 문법
+
+- `js` 안에 `html` 문법을 사용하는 경우가 있는데,
+- 이것이 React에서 지원하는 JSX문법이다.
+
+<br/>
+
+## 4.1. JSX 문법
+
+- Js 와 HTML 문법을 섞어서 사용하여, JS의 확장된 문법이다.
+
+<br/>
+
+### 4.1.1. JSX 주의점(1)
+
+- JSX는 JS의 확장된 문법으로 HTML을 그대로 사용할 수는 없다.
+- 예를 들어, class를 추가할 때,
+
+```react
+import ReactDOM from 'react-dom'
+
+class Dice{
+    roll(){
+        console.log('Roll')
+    }
+}
+
+ReactDOM.render(<p class="Hello">안녕 리액트!</p>, documnet.getElementById('root') // x
+```
+
+- JSX에서 `class`를 작서하려면, class가 아니라, `className` 으로 해야한다.
+
+```react
+ReactDOM.render(<p className="Hello">안녕 리액트!</p>, documnet.getElementById('root')
+```
+
+<br/>
+
+### 4.1.2 JSX 주의점(2)
+
+- 또한, `for` 태그를 사용할 수 없다.
+
+```react
+import ReactDOM from 'react-dom'
+
+ReactDOM.render(
+	<from>
+ 	  <label for="name">이름</label>   
+   	  <input id="name" type="text"/>   
+    </from>,
+    document.getElementById('root')
+)
+```
+
+- 이와 같이 `for` 속성을 사용하려면, 
+- `htmlFor` 로 작성을 해야한다.
+
+```react
+import ReactDOM from 'react-dom'
+
+ReactDOM.render(
+	<from>
+ 	  <label htmlFor="name">이름</label>   
+   	  <input id="name" type="text"/>   
+    </from>,
+    document.getElementById('root')
+)
+```
+
+<br/>
+
+### 4.1.2 JSX 주의점(3)
+
+- 또한 이벤트 `이벤트 핸들러`의 코드 방법이 조금씩 다르다
+
+```react
+import ReactDOM from 'react-dom'
+
+ReactDOM.render(
+	<from>
+ 	  <label htmlFor="name">이름</label>   
+   	  <input id="name" type="text" onBlue="" onFocus="" OnMouseDown=""/>   
+    </from>,
+    document.getElementById('root')
+)
+```
+
+- ` onBlue="" onFocus="" OnMouseDown=""`
+- 이처럼 카멜케이스 형식으로 작성한다.
