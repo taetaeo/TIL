@@ -1,5 +1,9 @@
 # 01. 리액트에서 fetch 사용하기
 
+- 웹브라우저와 서버를 통신하여 데이터를 불러온다.
+
+<br/>
+
 ## 01.1. fetch & async / await & Promise
 
 ### 01.1.1. `fetch` 함수
@@ -178,7 +182,7 @@ fetch('https://learn.codeit.kr/api/film-reviews')
 
 <br/>
 
-### 01.2.2. mock데이터에서 fetch로 받아오기
+### 01.2.2. fetch로 서버에서 데이터 받아오기
 
 #### 1) api.js
 
@@ -194,14 +198,18 @@ export async function getRewviews() {
 }
 ```
 
-- `fetch`를 호출하고 받아온 `response` 바디를 return하는 함수이다. 
+- `fetch`를 호출하고 받아온 `response` 를 return하는 함수이다.
+- `async / await`  키워드를 사용하여, 비동기로 작동하도록 한다.
+  - 네트워크 request를 기다렸다가, response에서 json함수를 호출하고, JOSN 변환이 끝나면, 그 결과물을 return한다.
+
+
 - `json()` 함수를 호출하여, JSON변환을 통해서,  JSON 데이터를 javascript 객체로 변환한다.
 
 <br/>
 
 #### [참고] fetch json()메서드
 
-- etch API의 응답(response) 객체는`json()`를 제공하고 있어`JSON.parse()` 대신 사용할 수 있다.
+- fetch API의 응답(response) 객체는`json()`를 제공하고 있어`JSON.parse()` 대신 사용할 수 있다.
 
 ```js
 fetch(데이터요청 할 서버 url)
@@ -222,7 +230,7 @@ fetch(데이터요청 할 서버 url)
 
 <br/>
 
-#### 2) App.js
+#### 2) App.js - mock 대신 비동기 통신한 데이터 불러오기
 
 ```react
 // 프로젝트의 최상위 컴포넌트
@@ -248,7 +256,7 @@ function App() {
     const nextItems = items.filter((item) => item.id !== id);
     setItems(nextItems);
   };
-  // 3.
+  // 3. 데이터 불러오기 핸들러
   const handleLoadClick = async () => {
     const { reviews } = await getRewviews();
     setItems(reviews);
@@ -272,7 +280,7 @@ export default App;
 1. `MockItems`를 제거
 
 2. ` const [items, setItems] = useState([]);` 빈배열을 초기값으로 설정한다.
-3. `handleLoadClick` 함수를 만든다. 
+3. `handleLoadClick` 함수를 통해서, 데이터를 불러오는 함수를 만든다.
    - `import { getRewviews } from "../api";` 를 불러오고,
    - `reviews` 프로퍼티를 `setItems`에 넣는다.
 4. `<button onClick={handleLoadClick}>불러오기</button>` 불러오기 버튼을 누르면, 네트워크로 연결된 데이터들이 출력되도록 한다.
@@ -282,3 +290,66 @@ export default App;
 ## 01.3. 결과
 
 ![1](https://github.com/ohtaekwon/TIL/blob/master/React/React-Data/2_%EB%8D%B0%EC%9D%B4%ED%84%B0_%EA%B0%80%EC%A0%B8%EC%98%A4%EA%B8%B0/img/1.gif?raw=true)
+
+<br/>
+
+## 01.4. 완성 코드
+
+### 01.4.1. App.js
+
+```react
+import ReviewList from "./ReviewList";
+import { useState } from "react";
+import { getReviews } from "../api";
+
+function App() {
+  // State
+  // Item State
+  const [items, setItems] = useState([]);
+  // order State
+  const [order, setOrder] = useState("createdAt");
+  // 정렬 - 내림차순
+  const sortedItems = items.sort((a, b) => b[order] - a[order]);
+
+  // 이벤트 핸들러
+  // 버튼 - 정렬
+  const handleNewestClick = () => setOrder("createdAt");
+  const handleBestClick = () => setOrder("rating");
+  // 버튼 - 삭제
+  const handleDelete = (id) => {
+    const nextItems = items.filter((item) => item.id !== id);
+    setItems(nextItems);
+  };
+  // 데이터 불러오기 
+  const handleLoadClick = async () => {
+    const { reviews } = await getReviews();
+    setItems(reviews);
+  };
+
+  return (
+    <div>
+      <div>
+        <button onClick={handleNewestClick}>최신순</button>
+        <button onClick={handleBestClick}>평점순</button>
+      </div>
+      <ReviewList items={sortedItems} onDelete={handleDelete} />
+      <button onClick={handleLoadClick}>불러오기</button>
+    </div>
+  );
+}
+
+export default App;
+```
+
+<br/>
+
+### 01.4.2. api.js
+
+```react
+export async function getReviews() {
+  const res = await fetch("https://learn.codeit.kr/api/film-reviews");
+  const body = await res.json();
+  return body;
+}
+```
+
