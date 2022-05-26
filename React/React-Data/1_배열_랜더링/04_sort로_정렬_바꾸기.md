@@ -1,6 +1,6 @@
 # 04. sort로 정렬 바꾸기
 
-- `map` 배열 메서드를 통해서, 각 데이터를 랜더링한다.
+- `sort` 배열 메서드를 통해서, 각 데이터를 정렬한다.
 
 <br/>
 
@@ -74,7 +74,7 @@ console.log(numbers); // (3) [353, 721, 421]
 
 ## 04.2. sort 메서드 적용
 
-### 04.2.1. 
+### 04.2.1.  `sort()` 정렬 메서드
 
 #### 1) App.js
 
@@ -94,27 +94,60 @@ function App(){
 ```
 
 1. 내림차순 정렬하는 변수를 만들고, prop로, 전달한다.
-   - 작은 순서대로 정렬: `items.sort((a, b) => a - b)`
-   - 크기가 큰 순서대로 정렬: `items.sort((a, b) => b - a)`
+   - 작은 순서대로 정렬(오름차순): `items.sort((a, b) => a - b)`
+   - 크기가 큰 순서대로 정렬(내림차순): `items.sort((a, b) => b - a)`
 
 <br/>
 
-#### 2) App.js
+- 정렬기준을 정렬기준으로 prop를 변경하여 전달하도록 하려면? 
+  - `state`를 활용한다.
+
+```react
+import ReviewList from "./ReviewList";
+import items from "../mock.json";
+import { useState } from "react";
+
+function App() {
+  // order State 
+  const [order, setOrder] = useState('createdAt')
+
+  // 정렬 - 내림차순
+  const sortedItems = items.sort((a, b) => b[order] - a[order]); 
+
+  return (
+    <div>
+      <ReviewList items={sortedItems} />
+    </div>
+  );
+}
+
+export default App;
+
+```
+
+<br/>
+
+### 04.2.2. 사용자가 State값을 선택하도록 지정
 
 - 정렬기준을 최신순과 별점순을 선택하도록 한다.
 - prop를 변경하여 전달하도록 하려면? 
   - `state`를 활용한다.
+
+#### 1) App.js
 
 ```react
 import ReviewList from "./ReviewList";
 import items from "../mock.json";
 
 function App(){
-    const [order, setOrder] = useState('createdAt') // 1. order
-    const sortedItems = items.sort((a,b)=> b[order] - a[order]) // 2.
-    // 3.최신순
+    // 1. order State 
+    const [order, setOrder] = useState('createdAt') 
+    // 2. 정렬 - 내림차순
+    const sortedItems = items.sort((a,b)=> b[order] - a[order]) 
+    // 3. 이벤트 핸들러
+    // 3-1. 최신순
     const handleNewestClick = () => setOrder('createdAt')
-    // 4.별점순 
+    // 3-2.별점순 
     const handleBestClick = () => setOrder('rating')
 
     return (
@@ -130,8 +163,8 @@ function App(){
 ```
 
 1. order state를 만들고, 기본값을 `createdAt`로 한다.
-
 2. `order` 의 기준에 따라, 최신순, 별점순을 적용하도록 한다.
-3. 최신순을 선택하도록 하는 setOrder에 기본값 `createdAt` 을 적용한다.
-4. 별점순을 선택하도록 하는 setOrder에 기본값 `rating` 을 적용한다.
-5. 버튼을 만들어 적용한다.
+3. 이벤트 핸들러 함수를 만들어서 버튼 클릭시에, 정렬 기준을 변경하도록 한다.
+   1. 최신순을 선택하도록 하는 setOrder에 기본값 `createdAt` 을 적용한다.
+   2. 별점순을 선택하도록 하는 setOrder에 기본값 `rating` 을 적용한다.
+4. 버튼을 만들고 Prop으로 핸들러 함수를 내려준다. 
