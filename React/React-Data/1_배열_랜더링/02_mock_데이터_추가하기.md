@@ -31,7 +31,9 @@ root.render(<App />);
 
 <br/>
 
-### 02.1.2. mock.json 파일 불러오기
+## 02.2. mock.json
+
+### 02.2.1. 파일 불러오기
 
 - `mock` 데이터란, 네트워크로 불러올 데이터를 흉내내기 위한 데이터
 
@@ -39,7 +41,7 @@ root.render(<App />);
 
 <br/>
 
-### 02.1.3. `components` 폴더 생성
+### 02.2.2. `components` 폴더 생성
 
 - `src` 폴더에 `components` 폴더를 생성 후, 
 - `<component/>` 들을 구성한다.
@@ -101,7 +103,7 @@ root.render(<App />);
 
 <br/>
 
-## 02.2. mock.json 
+## 02.3. mock.json 
 
 ```
 [
