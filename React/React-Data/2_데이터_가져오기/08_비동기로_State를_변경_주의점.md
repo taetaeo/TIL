@@ -47,4 +47,12 @@ function App(){
 
 - `setItems((prevItems)=>[...prevItems, ...reviews]);`
 - `prevItems` 라는 파라미터로 이전 State값을 받아서, 변경할 State값을 리턴하면 된다. 
-- 이때, `prevItems`값은 고정된 것이 아니라, 함수의 파라미터이기 때문에, React가 현재시점의 State를 전달하게 된다. 
+- 이때, `prevItems`값은 고정된 것이 아니라, 함수의 파라미터이기 때문에, 리액트가 현재시점의 State를 전달하게 된다. 
+  - 즉, `삭제` 버튼을 눌러, 삭제된 시점의 State값을 전달한다.
+
+<br/>
+
+## 08.2. 비동기로 State를 변경할 때, 주의할 점
+
+- 비동기 상태에서 State를 변경할 때, 이전 State값을 사용하려면 setter함수에서 콜백을 사용해서 이전 State를 사용한다.
+  - ex) `   setItems((prevItems)=>[...prevItems, ...reviews]);`
