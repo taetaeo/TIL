@@ -1,6 +1,11 @@
 # 03. 하나의 state로 폼 구하기
 
-## 03.1. 입력 폼 각각을 하나의 State에서 관리하기
+- 입력 폼에서 여러개로 관리하던 State를 하나의 State로 통합적으로 관리한다.
+- `input` 태그의 `name` 속성을 활용하는 것이 핵심이다.
+
+<br/>
+
+## 03.1. 하나의 State로 관리하기
 
 ### 03.1.1. `<input>` 태그의 `name` 속성을 활용
 
@@ -20,7 +25,7 @@ function ReviewForm() {
 }
 ```
 
-- 우선 `title`, `rating` , `content` 각각의 State를 지운다. 
+- 우선 `title`, `rating` , `content` 각각의 State를 지우고, 하나의 객체 State를 만든다.
 
 <br/>
 
